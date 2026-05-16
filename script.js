@@ -27,14 +27,14 @@ function getHumanChoice() {
     let input = prompt("Enter ROCK or PAPER or SCISSORS: ");
     let humanChoice;
 
+    if(input === "" || input === null) return;
+
     if(input.toLowerCase() === "rock") {
         humanChoice = "rock";
     } else if(input.toLowerCase() === "paper") {
         humanChoice = "paper";
     } else if(input.toLowerCase() === "scissors" || input.toLowerCase() === "scissor") {
         humanChoice = "scissors";
-    } else {
-        console.log("Enter a valid value: ROCK or PAPER or SCISSORS");
-    }
+    } 
     return humanChoice;
 }
