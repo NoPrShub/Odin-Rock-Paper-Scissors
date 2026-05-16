@@ -1,3 +1,41 @@
+let humanScore = 0;
+let computerScore = 0;
+
+// start game
+playGame();
+
+// simulates 5 rounds of the game
+function playGame() {
+    let totalRounds = 5;
+    let currentRoundNumber = 1;
+    console.log("Total number of rounds: " + totalRounds);
+
+    while (totalRounds--) {
+        console.log("------------------------------------------")
+        console.log("ROUND " + currentRoundNumber + ": ")
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+
+        if (humanSelection === undefined) {
+            console.log("Enter a valid value: ROCK or PAPER or SCISSORS. Reload page to play again.")
+            return;
+        }
+
+        playRound(humanSelection, computerSelection);
+        currentRoundNumber++;
+    }
+
+    console.log("------------------------------------------")
+    if (humanScore > computerScore) {
+        console.log("YOU WINS!");
+    } else if (computerScore > humanScore) {
+        console.log("COMPUTER WINS!");
+    } else {
+        console.log("IT'S A DRAW. NO ONE WINS.");
+    }
+}
+
+
 // capitalizes first letter and converts rest to lowercase
 function capitalize(text) {
     return text.charAt(0).toUpperCase() + text.substring(1).toLowerCase();
@@ -30,7 +68,7 @@ function getComputerChoice() {
 // getHumanChoice(): takes human input and returns it.
 // - if no input is given returns undefined.
 function getHumanChoice() {
-    let input = prompt("Enter ROCK or PAPER or SCISSORS: ");
+    let input = prompt("Enter ROCK or PAPER or SCISSORS(SCISSOR): ");
     let humanChoice;
 
     if (input === "" || input === null) return;
@@ -69,7 +107,7 @@ function rockAndScissors(humanChoice, computerChoice) {
 
 // incrementScore: increments score by 1 for whoever wins
 function incrementScore(humanWin) {
-    if(humanWin === undefined) {
+    if (humanWin === undefined) {
         return;
     }
     if (humanWin) {
@@ -94,10 +132,6 @@ function displayResult(humanWin, humanChoice, computerChoice) {
 
 // simulates one round of the game
 function playRound(humanChoice, computerChoice) {
-    if (humanChoice === undefined) {
-        console.log("Enter a valid value: ROCK or PAPER or SCISSORS.")
-        return;
-    }
 
     // holds true if human wins or undefined if draw
     let humanWin;
@@ -118,18 +152,18 @@ function playRound(humanChoice, computerChoice) {
             case "paper":
                 if (computerChoice === "scissors") {
                     humanWin = paperAndScissors(humanChoice, computerChoice);
-                } else if(computerChoice === "rock") {
+                } else if (computerChoice === "rock") {
                     humanWin = rockAndPaper(humanChoice, computerChoice);
                 }
                 break;
 
             case "scissors":
-                if(computerChoice === "rock") {
+                if (computerChoice === "rock") {
                     humanWin = rockAndScissors(humanChoice, computerChoice);
-                } else if(computerChoice === "paper") {
+                } else if (computerChoice === "paper") {
                     humanWin = paperAndScissors(humanChoice, computerChoice);
                 }
-                break;  
+                break;
         }
     }
 
@@ -137,10 +171,3 @@ function playRound(humanChoice, computerChoice) {
     incrementScore(humanWin);
     displayResult(humanWin, humanChoice, computerChoice);
 }
-
-let humanScore = 0;
-let computerScore = 0;
-
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-playRound(humanSelection, computerSelection);
