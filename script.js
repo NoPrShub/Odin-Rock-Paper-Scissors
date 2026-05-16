@@ -11,13 +11,13 @@ function playGame() {
     console.log("Total number of rounds: " + totalRounds);
 
     while (totalRounds--) {
-        console.log("------------------------------------------")
+        console.log("------------------------------------------");
         console.log("ROUND " + currentRoundNumber + ": ")
         const humanSelection = getHumanChoice();
         const computerSelection = getComputerChoice();
 
         if (humanSelection === undefined) {
-            console.log("Enter a valid value: ROCK or PAPER or SCISSORS. Reload page to play again.")
+            console.log("Enter a valid value: ROCK or PAPER or SCISSORS. Reload page to play again.");
             return;
         }
 
@@ -25,7 +25,7 @@ function playGame() {
         currentRoundNumber++;
     }
 
-    console.log("------------------------------------------")
+    console.log("------------------------------------------");
     if (humanScore > computerScore) {
         console.log("YOU WINS!");
     } else if (computerScore > humanScore) {
