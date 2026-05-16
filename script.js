@@ -22,10 +22,12 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-// getHumanChoice(): takes human input and returns it
+// getHumanChoice(): takes human input and returns it.
+// - if no input is given returns undefined.
 function getHumanChoice() {
     let input = prompt("Enter ROCK or PAPER or SCISSORS: ");
     let humanChoice;
+    console.log(input);
 
     if(input === "" || input === null) return;
 
