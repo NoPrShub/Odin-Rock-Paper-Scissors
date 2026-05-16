@@ -6,18 +6,18 @@ function randomNumber() {
 // getComputerChoice(): returns computer choice
 function getComputerChoice() {
     let randNum = randomNumber();
-    let guess;
+    let computerChoice;
 
     switch(randNum) {
         case 1:
-            guess = "rock";
+            computerChoice = "rock";
             break;
         case 2:
-            guess = "paper";
+            computerChoice = "paper";
             break;
         case 3:
-            guess = "scissors";
+            computerChoice = "scissors";
             break;
     }
-    return guess;
+    return computerChoice;
 }
