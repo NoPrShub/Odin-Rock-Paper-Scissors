@@ -27,7 +27,6 @@ function getComputerChoice() {
 function getHumanChoice() {
     let input = prompt("Enter ROCK or PAPER or SCISSORS: ");
     let humanChoice;
-    console.log(input);
 
     if(input === "" || input === null) return;
 
@@ -40,3 +39,44 @@ function getHumanChoice() {
     } 
     return humanChoice;
 }
+
+function rockAndPaper(humanChoice, computerChoice) {
+    if(humanChoice === "paper") {
+        return true;
+    }
+    return false;
+}
+
+function paperAndScissors(humanChoice, computerChoice) {
+    if(humanChoice === "scissors") {
+        return true;
+    }
+    return false;
+}
+
+function rockAndScissors(humanChoice, computerChoice) {
+    if(humanChoice === "rock") {
+        return true;
+    }
+    return false;
+}
+
+// function playRound(humanChoice, computerChoice) {
+//     if(humanChoice === undefined) {
+//         console.log("Enter a valid value: ROCK or PAPER or SCISSORS.")
+//         return;
+//     }
+    
+//     if(humanChoice === computerChoice) {
+//         console.log("No one wins. Both chose " + computerChoice);
+//     } else if(humanChoice === "rock" && computerChoice === "paper") {
+//         console.log("")
+//     }
+// }
+
+// let humanScore = 0;
+// let computerScore = 0;
+
+// const humanSelection = getHumanChoice();
+// const computerSelection = getComputerChoice();
+// playRound(humanSelection, computerSelection);
