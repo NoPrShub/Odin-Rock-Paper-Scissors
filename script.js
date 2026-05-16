@@ -1,3 +1,8 @@
+// capitalizes first letter and converts rest to lowercase
+function capitalize(text) {
+    return text.charAt(0).toUpperCase() + text.substring(1).toLowerCase();
+}
+
 // randomNumber(): returns random number between 1 and 3 inclusive
 function randomNumber() {
     return Math.floor(Math.random() * 3) + 1;
@@ -77,16 +82,17 @@ function incrementScore(humanWin) {
 // displayResult(): prints human win or lose to console
 function displayResult(humanWin, humanChoice, computerChoice) {
     if (humanWin === undefined) {
-        console.log("No one wins. Both chose " + computerChoice);
+        console.log("No one wins. Both chose " + capitalize(computerChoice));
     } else if (humanWin) {
-        console.log("You win! " + humanChoice + " beats " + computerChoice);
+        console.log("You win! " + capitalize(humanChoice) + " beats " + capitalize(computerChoice));
     } else {
-        console.log("You lose! " + computerChoice + " beats " + humanChoice);
+        console.log("You lose! " + capitalize(computerChoice) + " beats " + capitalize(humanChoice));
     }
     console.log("Human Score: " + humanScore);
     console.log("Computer Score: " + computerScore);
 }
 
+// simulates one round of the game
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === undefined) {
         console.log("Enter a valid value: ROCK or PAPER or SCISSORS.")
