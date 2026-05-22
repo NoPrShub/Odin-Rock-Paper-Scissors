@@ -3,7 +3,7 @@ let computerScore = 0;
 let roundWinner = "";
 
 // start game
-playGame();
+// playGame();
 
 // plays 5 rounds of the game
 function playGame() {

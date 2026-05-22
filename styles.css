@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Play, sans-serif;
+}
+
+.header {
+    border: 2px solid pink;
+}
+
+.header h1 {
+    text-align: center;
+    font-size: 50px;
+}
+
+.round-status {
+    border: 2px solid goldenrod;
+    text-align: center;
+    font-size: 32px;
+}
+
+.score {
+    border: 2px solid skyblue;
+    font-size: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.container {
+    
+}
