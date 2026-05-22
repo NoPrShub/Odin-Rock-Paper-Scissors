@@ -2,6 +2,7 @@ let humanScore = 0;
 let computerScore = 0;
 let roundWinner = "";
 
+// start game
 playGame();
 
 // plays 5 rounds of the game
