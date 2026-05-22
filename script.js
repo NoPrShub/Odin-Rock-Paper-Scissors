@@ -6,6 +6,7 @@ playGame();
 
 // plays 5 rounds of the game
 function playGame() {
+    console.log("5 Rounds. Highest Score Wins");
     let i = 1;
     while (i <= 5) {
         console.log("ROUND : " + i)
