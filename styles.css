@@ -37,3 +37,7 @@ body {
 #computer-score-container {
     text-align: center;
 }
+
+.symbol {
+    padding: 20px;
+}
