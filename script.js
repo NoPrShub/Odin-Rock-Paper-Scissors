@@ -1,44 +1,21 @@
 let humanScore = 0;
 let computerScore = 0;
 let roundWinner = "";
+let currentRoundNumber = 0;
 
-// start game
-// playGame();
 
-// plays 5 rounds of the game
-function playGame() {
-    console.log("5 Rounds. Highest Score Wins");
-    let i = 1;
-    while (i <= 5) {
-        console.log("ROUND : " + i)
-        let humanChoice = getHumanChoice();
-        let computerChoice = getComputerChoice();
-
-        playRound(humanChoice, computerChoice);
-        displayRoundResult(humanChoice, computerChoice);
-        i++;
-    }
-
-    console.log("-------------------------------------------");
-    if (humanScore > computerScore) {
-        console.log("YOU WIN!");
-    } else {
-        console.log("YOU LOSE!")
-    }
-    console.log("RELOAD PAGE TO PLAY AGAIN.");
+function isGameOver() {
+    return currentRoundNumber == 5;
 }
 
-// capitalizes first letter and converts rest to lowercase
 function capitalizeFirstLetter(text) {
     return text.charAt(0).toUpperCase() + text.substring(1).toLowerCase();
 }
 
-// returns random number between 1 and 3 inclusive
 function randomNumber() {
     return Math.floor(Math.random() * 3) + 1;
 }
 
-// returns computer choice
 function getComputerChoice() {
     let randNum = randomNumber();
     let computerChoice;
@@ -57,42 +34,9 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-// takes human input and returns it.
-function getHumanChoice() {
-
-}
-// function getHumanChoice() {
-//     let input = prompt("Enter ROCK or PAPER or SCISSORS(SCISSOR): ");
-//     let humanChoice;
-
-//     if (input.toLowerCase() === "rock") {
-//         humanChoice = "rock";
-//     } else if (input.toLowerCase() === "paper") {
-//         humanChoice = "paper";
-//     } else if (input.toLowerCase() === "scissors" || input.toLowerCase() === "scissor") {
-//         humanChoice = "scissors";
-//     }
-//     return humanChoice;
-// }
-
-// prints human win or lose to console
-function displayRoundResult(humanChoice, computerChoice) {
-    if (roundWinner === "tie") {
-        console.log("It's a tie. Both chose " + capitalizeFirstLetter(computerChoice) + ".");
-    } else if (roundWinner === "human") {
-        console.log("You win! " + capitalizeFirstLetter(humanChoice) + " beats " 
-                    + capitalizeFirstLetter(computerChoice) + ".");
-    } else if (roundWinner === "computer") {
-        console.log("You lose! " + capitalizeFirstLetter(humanChoice) + " is beaten by "
-                    + capitalizeFirstLetter(computerChoice) + ".");
-    }
-    console.log("Human Score: " + humanScore);
-    console.log("Computer Score: " + computerScore);
-}
-
-// simulates one round of the game
 function playRound(humanChoice, computerChoice) {
 
+    currentRoundNumber++;
     if (humanChoice === computerChoice) {
         roundWinner = "tie";
     } else if (
@@ -109,7 +53,6 @@ function playRound(humanChoice, computerChoice) {
         computerScore++;
     }
 
-    displayRoundResult(humanChoice, computerChoice);
 }
 
 // UI
@@ -117,15 +60,111 @@ function playRound(humanChoice, computerChoice) {
 const rockBtn = document.querySelector("#rock");
 const paperBtn = document.querySelector("#paper");
 const scissorsBtn = document.querySelector("#scissors");
+const roundStatus = document.querySelector(".round-status p");
+const humanScoreSpan = document.querySelector("#human-score span");
+const computerScoreSpan = document.querySelector("#computer-score span");
+const endGameDialog = document.querySelector("#dialog");
+const restartBtn = document.querySelector("#restart-game");
+const gameEndMessage = document.querySelector("#game-result");
+const humanSignImg = document.querySelector("#human-sign-img");
+const computerSignImg = document.querySelector("#computer-sign-img");
 
-rockBtn.addEventListener("click", () => userChoice("rock"));
-paperBtn.addEventListener("click", () => userChoice("paper"));
-scissorsBtn.addEventListener("click", () => userChoice("scissors"));
+rockBtn.addEventListener("click", () => handleClick("rock"));
+paperBtn.addEventListener("click", () => handleClick("paper"));
+scissorsBtn.addEventListener("click", () => handleClick("scissors"));
+restartBtn.addEventListener("click", () => {
+    restart();
+    endGameDialog.close();
+});
 
-function userChoice(humanSelection) {
-    console.log(humanSelection);
+function handleClick(humanSelection) {
+    if (isGameOver()) {
+        gameEndMessage.textContent = updateGameResult();
+        endGameDialog.showModal();
+        return;
+    }
     let computerSelection = getComputerChoice();
     playRound(humanSelection, computerSelection);
+    updateSigns(humanSelection, computerSelection);
+    displayRoundResult(humanSelection, computerSelection);
+    if (isGameOver()) {
+        gameEndMessage.textContent = updateGameResult();
+        endGameDialog.showModal();
+    }
+}
+
+function updateGameResult() {
+    if (humanScore > computerScore) {
+        roundStatus.textContent = "You Win";
+    } else if (humanScore < computerScore) {
+        roundStatus.textContent = "You Lose";
+    } else {
+        roundStatus.textContent = "It's a tie!";
+    }
+    return roundStatus.textContent;
+}
+
+function displayRoundResult(humanSelection, computerSelection) {
+    if (roundWinner === "tie") {
+        roundStatus.textContent = `It's a tie. Both chose ${capitalizeFirstLetter(computerSelection)}.`;
+    } else if (roundWinner === "human") {
+        roundStatus.textContent = `You Win! ${capitalizeFirstLetter(humanSelection)} beats 
+                    ${capitalizeFirstLetter(computerSelection)}.`;
+    } else if (roundWinner === "computer") {
+        roundStatus.textContent = `You lose! ${capitalizeFirstLetter(humanSelection)} is beaten by
+                    ${capitalizeFirstLetter(computerSelection)}.`;
+    }
+    humanScoreSpan.textContent = humanScore;
+    computerScoreSpan.textContent = computerScore;
 }
 
 
+function updateSigns(humanSelection, computerSelection) {
+    humanSignImg.width = 100;
+    switch(humanSelection) {
+        case "rock":
+            humanSignImg.src = "./icons/fist.png";
+            humanSignImg.alt = "image-of-rock";
+            break;
+        case "paper":
+            humanSignImg.src = "./icons/hand-paper.png";
+            humanSignImg.alt = "image-of-paper";
+            break;
+        case "scissors":
+            humanSignImg.src = "./icons/scissors.png";
+            humanSignImg.alt = "image-of-scissors";
+            break;
+    }
+
+    computerSignImg.width = 100;
+    switch(computerSelection) {
+        case "rock":
+            computerSignImg.src = "./icons/fist.png";
+            computerSignImg.alt = "image-of-rock";
+            break;
+        case "paper":
+            computerSignImg.src = "./icons/hand-paper.png";
+            computerSignImg.alt = "image-of-paper";
+            break;
+        case "scissors":
+            computerSignImg.src = "./icons/scissors.png";
+            computerSignImg.alt = "image-of-scissors";
+            break;
+    }
+}
+
+function restart() {
+    humanScore = 0;
+    computerScore = 0;
+    roundWinner = "";
+    currentRoundNumber = 0;
+
+    roundStatus.textContent = "5 Rounds. Highest Score Wins.";
+    humanScoreSpan.textContent = 0;
+    computerScoreSpan.textContent = 0;
+    
+    computerSignImg.src = "#";
+    computerSignImg.alt = "#";
+    humanSignImg.src = "#";
+    humanSignImg.alt = "#";
+}

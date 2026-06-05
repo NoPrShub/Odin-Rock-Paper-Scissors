@@ -16,15 +16,47 @@
         <p>5 Rounds. Highest Score Wins.</p>
     </div>
 
-    <div class="score">
-        <p>You: 0</p>
-        <p>Computer: 0</p>
+    <div class="score-container">
+        <div class="human-score-container">
+            <div id="human-sign">
+                <img id="human-sign-img" src="#" alt="#">
+            </div>
+            <p id="human-score">You: <span>0</span></p>
+        </div>
+        
+        <div class="computer-score-container">
+            <div id="computer-sign">
+                <img id="computer-sign-img" src="#" alt="#">
+            </div>
+            <p id="computer-score">Computer: <span>0</span></p>
+        </div>
     </div>
 
     <div class="container">
-        <button id="rock" type="button">Rock</button>
-        <button id="paper" type="button">Paper</button>
-        <button id="scissors" type="button">Scissors</button>
+        <button id="rock" type="button">
+            <div class="symbol">
+                <img src="./icons/fist.png" alt="image-of-rock" width="100px">
+            </div>
+            Rock
+        </button>
+        <button id="paper" type="button">
+            <div class="symbol">
+                <img src="./icons/hand-paper.png" alt="image-of-paper" width="100px">
+            </div>
+            Paper
+        </button>
+        <button id="scissors" type="button">
+            <div class="symbol">
+                <img src="./icons/scissors.png" alt="image-of-scissor" width="100px">
+            </div>
+            Scissors
+        </button>
     </div>
+
+
+    <dialog id="dialog">
+        <p id="game-result"></p>
+        <button id="restart-game">Restart</button>
+    </dialog>
 </body>
 </html>
