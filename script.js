@@ -1,11 +1,10 @@
 let humanScore = 0;
 let computerScore = 0;
 let roundWinner = "";
-let currentRoundNumber = 0;
 
 
 function isGameOver() {
-    return currentRoundNumber == 5;
+    return humanScore == 5 || computerScore == 5;
 }
 
 function capitalizeFirstLetter(text) {
@@ -36,7 +35,6 @@ function getComputerChoice() {
 
 function playRound(humanChoice, computerChoice) {
 
-    currentRoundNumber++;
     if (humanChoice === computerChoice) {
         roundWinner = "tie";
     } else if (
@@ -83,10 +81,12 @@ function handleClick(humanSelection) {
         endGameDialog.showModal();
         return;
     }
+
     let computerSelection = getComputerChoice();
     playRound(humanSelection, computerSelection);
     updateSigns(humanSelection, computerSelection);
     displayRoundResult(humanSelection, computerSelection);
+
     if (isGameOver()) {
         gameEndMessage.textContent = updateGameResult();
         endGameDialog.showModal();
@@ -157,9 +157,8 @@ function restart() {
     humanScore = 0;
     computerScore = 0;
     roundWinner = "";
-    currentRoundNumber = 0;
 
-    roundStatus.textContent = "5 Rounds. Highest Score Wins.";
+    roundStatus.textContent = "First to score 5 points wins.";
     humanScoreSpan.textContent = 0;
     computerScoreSpan.textContent = 0;
     
